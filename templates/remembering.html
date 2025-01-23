@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Lilia - cards{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row">
+      <div class="col text-center">
+        <h1>Recuerda usando tarjetas</h1>
+      </div>
+    </div>
+    <div class="row my-4">
+      <div class="col d-grid gap-2">
+        <button class="btn btn-outline-purple" data-bs-toggle="modal" data-bs-target="#addCardModal">Agregar tarjeta</button>
+      </div>
+      <div class="col d-grid gap-2">
+        <button class="btn btn-outline-purple" data-bs-toggle="modal" data-bs-target="#generateCardModal">Generar tarjetas</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <p class="h1 text-center" id="text-card">Test</p>
+          </div>
+          <div class="card-body">
+            <p class="h3 text-center text-secondary" id=""><span id="translation-text" class="invisible">Transaltion</span> <span id="visible-button"><i class="bi bi-eye-slash"></i></span></p>
+            <div class="row mt-5">
+              <div class="col d-flex justify-content-center">
+                <button class="btn btn-outline-danger fs-1 px-4" id="cancel-button"><i class="bi bi-x-circle"></i></button>
+              </div>
+              <div class="col d-flex justify-content-center">
+                <button class="btn btn-outline-success fs-1 px-4" id="accept-button"><i class="bi bi-check-circle"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <span class="text-danger">Si no supieras</span>
+              </div>
+              <div class="col d-flex justify-content-center">
+                <span class="text-success">Si conoces la traducción</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addCardModalLabel">Agrega una nueva tarjeta de repaso</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="model-close-button"></button>
+        </div>
+        <div class="modal-body">
+          <label for="" class="form-label">Ingresa la palabra u orgación</label>
+          <input type="text" class="form-control" id="word-input">
+          <label for="" class="form-label">Agrega la traducción</label>
+          <input type="text" class="form-control" id="translation-input">
+          <label for="" class="form-label">Agrega un ejemplo de uso</label>
+          <input type="text" class="form-control" id="example-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-purple" id="add-card-button">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="generateCardModal" tabindex="-1" aria-labelledby="generateCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="generateCardModalLabel">Generar vocabulario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="model-close-button"></button>
+        </div>
+        <div class="modal-body">
+          <label for="" class="form-label">Tema principal</label>
+          <input type="text" class="form-control" id="topic-input">
+          <label for="" class="form-label">Agrega una descripción si quieres ser más detallado</label>
+          <input type="text" class="form-control" id="description-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-purple" id="generate-card-button">Generar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./../static/js/remembering.js"></script>
+{% endblock %}

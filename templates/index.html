@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Lilia{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md d-flex flex-column justify-content-center">
+        <h1>Aprende un nuevo idioma de manera interactiva y personalizada</h1>
+        <p class="h4">
+          Mejora tu reading, speaking, writing y listening con herramientas diseñadas para ti.
+        </p>
+        <div class="mt-4">
+          <a class="btn btn-outline-purple" href="/writing">Iniciar conversación <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="col-md">
+        <img src="./../static/img/share_opinion.png" alt="share_opinion" class="img-fluid">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <img src="./../static/img/researching.png" alt="Researching" class="img-fluid">
+      </div>
+      <div class="col d-flex flex-column justify-content-center">
+        <ul>
+          <li>Ejercicios dinámicos para hablar con confianza.</li>
+          <li>Corrección inteligente para escribir sin errores.</li>
+          <li>Escucha, lee y comprende en contextos reales.</li>
+          <li>Práctica personalizada basada en tu nivel.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-flex flex-column justify-content-center">
+        <ul>
+          <li>Habla y recibe feedback en tiempo real. Mejora tu pronunciación con IA.</li>
+          <li>Aprende con historias, diálogos y desafíos. No solo memorizas, sino que vives el idioma sin miedo a equivocarte.</li>
+          <li>¡Empieza ahora!</li>
+        </ul>
+      </div>
+      <div class="col">
+        <img src="./../static/img/education.png" alt="Education" class="img-fluid">
+      </div>
+    </div>
+  </div>
+{% endblock %}

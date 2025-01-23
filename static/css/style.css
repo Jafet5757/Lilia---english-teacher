@@ -1,0 +1,29 @@
+.btn-purple{
+  background-color: #6c63ff;
+  color: white;
+}
+
+.btn-outline-purple{
+  background-color: white;
+  color: #6c63ff;
+  border: 1px solid #6c63ff;
+}
+
+.btn-purple:hover{
+  background-color: #5b54e8;
+  color: white;
+}
+
+.btn-outline-purple:hover{
+  background-color: #5b54e8;
+  color: white;
+  border: 1px solid #5b54e8;
+}
+
+.invisible{
+  visibility: hidden;
+}
+
+.visible{
+  visibility: visible;
+}

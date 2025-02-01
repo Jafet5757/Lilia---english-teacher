@@ -4,25 +4,27 @@ const textCard = document.getElementById("text-card");
 const visibleButtons = document.getElementById("visible-button");
 const addCardButton = document.getElementById("add-card-button");
 const translationText = document.getElementById("translation-text");
+const textSentence = document.getElementById("text-sentence");
 let visibility = false;
 let indexCard = 0;
 
+let hiddentCards = [];
 let cards = [
   {
     'word': 'long',
-    'traduction': 'Grande',
+    'translation': 'Grande',
     'sentence': 'The long table',
     'score': 0
   },
   {
     'word': 'little',
-    'traduction': 'Pequeño',
+    'translation': 'Pequeño',
     'sentence': 'The little horse',
     'score': 0
   },
   {
     'word': 'house',
-    'traduction': 'Casa',
+    'translation': 'Casa',
     'sentence': 'The house is big',
     'score': 0
   }
@@ -30,15 +32,41 @@ let cards = [
 
 function loadCards() { 
   textCard.innerHTML = cards[indexCard].word;
-  translationText.innerHTML = cards[indexCard].traduction;
+  textSentence.innerHTML = cards[indexCard].sentence;
+  translationText.innerHTML = cards[indexCard].translation;
 }
 
 loadCards();
   
+/**
+ * Prepare the next card to be shown and reorder the cards
+ * @param {Number} score Points to add to the card
+ */
 function nextCard(score) {
   cards[indexCard].score += score;
   indexCard = (indexCard + 1) % cards.length;
+  if (indexCard === 0) {
+    reorderCards();
+  }
+  if (cards.length === 0) {
+    cards = hiddentCards;
+    hiddentCards = [];
+  }
   loadCards();
+}
+
+function reorderCards() {
+  cards.sort((a, b) => a.score - b.score);
+  // Hide cards over the threshold
+  const threshold = 2;
+  cards = cards.filter(card => {
+    if (card.score <= threshold) {
+      return true;
+    } else {
+      hiddentCards.push(card);
+      return false;
+    }
+  });
 }
 
 cancelButton.addEventListener("click", () => { 
@@ -81,7 +109,7 @@ function addCard() {
 
   cards.push({
     word: wordInput,
-    traduction: translationInput,
+    translation: translationInput,
     sentence: exampleInput,
     score: 0
   })
@@ -98,9 +126,19 @@ addCardButton.addEventListener("click", () => {
   addCard();
 })
 
+/***
+ * Generate new cards with IA
+ */
 document.getElementById("generate-card-button").addEventListener("click", () => {
   const topic = document.getElementById("topic-input");
   const description = document.getElementById("description-input");
+  const loadingSpinner = document.getElementById("loading-label-genereate-modal")
+  const button = document.getElementById("generate-card-button");
+
+  // start loading
+  loadingSpinner.classList.add("spinner-grow");
+  loadingSpinner.classList.add("spinner-grow-sm");
+  button.disabled = true;
   // send a petition to the server
   fetch('/api/generate-vocabulary', {
     method: 'POST',
@@ -113,14 +151,23 @@ document.getElementById("generate-card-button").addEventListener("click", () => 
     .then(data => {
       cards = data.vocabulary;
       console.log(cards);
-      // Reemplazar comillas simples por comillas dobles
-      cards = cards.replace(/'/g, '"');
       cards = JSON.parse(cards);
       indexCard = 0;
       loadCards();
+      // close the modal
+      document.getElementById("model-close-button-generate").click();
+      // clean the inputs
+      topic.value = "";
+      description.value = "";
     })
     .catch(error => {
       console.error('Error:', error);
-      alert('Error al enviar la carta');
-    });
+      alert('Error al generar las tarjetas');
+    })
+    .finally(() => {
+      // stop loading
+      loadingSpinner.classList.remove("spinner-grow");
+      loadingSpinner.classList.remove("spinner-grow-sm");
+      button.disabled = false;
+    })
 })

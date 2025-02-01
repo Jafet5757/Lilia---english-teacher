@@ -82,7 +82,7 @@ class WriteLetter(ChatController):
     """
     messages = [
       {"role": "system", "content": "Eres un experto en el idioma inglés, y un buen profesor"},
-      {"role": "user", "content": "Básado en un tema y descripción dame un listado de 10 palabras nuevas para aprender en inglés con su traducción y un ejemplo de uso, responde con el siguiente formato json de ejemplo, no agregués más texto para poder parsearlo: [{'word': 'long','traduction': 'Grande','sentence': 'The long table','score': 0},{'word': 'little','traduction': 'Pequeño','sentence': 'The little horse','score': 0}]"},
+      {"role": "user", "content": '''Básado en un tema y descripción dame un listado de 10 palabras nuevas para aprender en inglés con su traducción y un ejemplo de uso, responde con el siguiente formato json de ejemplo, no agregués más texto para poder parsearlo: [{"word": "long","translation": "Grande","sentence": "The long table","score": 0},{"word": "little","translation": "Pequeño","sentence": "The little horse","score": 0}]'''},
       {"role": "user", "content": f"Tema: {topic}, Descripción: {description}"}
     ]
     

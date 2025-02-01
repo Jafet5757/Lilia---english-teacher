@@ -20,6 +20,11 @@
   border: 1px solid #5b54e8;
 }
 
+.btn-purple:disabled{
+  background-color: #a49fff;
+  color: white;
+}
+
 .invisible{
   visibility: hidden;
 }

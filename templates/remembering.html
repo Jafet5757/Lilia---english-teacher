@@ -22,8 +22,10 @@
         <div class="card">
           <div class="card-header">
             <p class="h1 text-center" id="text-card">Test</p>
+            <p class="text-secondary text-center" id="text-sentence">La oración se usa así</p>
           </div>
           <div class="card-body">
+            <p class="text-center text-secondary">Traducción: </p>
             <p class="h3 text-center text-secondary" id=""><span id="translation-text" class="invisible">Transaltion</span> <span id="visible-button"><i class="bi bi-eye-slash"></i></span></p>
             <div class="row mt-5">
               <div class="col d-flex justify-content-center">
@@ -47,7 +49,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal - Agrega una tarjeta -->
   <div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -71,13 +73,13 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal - Genera tarjetas -->
   <div class="modal fade" id="generateCardModal" tabindex="-1" aria-labelledby="generateCardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="generateCardModalLabel">Generar vocabulario</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="model-close-button"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="model-close-button-generate"></button>
         </div>
         <div class="modal-body">
           <label for="" class="form-label">Tema principal</label>
@@ -87,7 +89,10 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-purple" id="generate-card-button">Generar</button>
+          <button type="button" class="btn btn-purple" id="generate-card-button">
+            <span class="" aria-hidden="true" id="loading-label-genereate-modal"></span>
+            Generar
+          </button>
         </div>
       </div>
     </div>

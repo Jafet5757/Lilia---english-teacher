@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Lilia - speaking{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Estilos personalizados */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      height: 80vh; /* Ocupa toda la altura de la pantalla */
+      padding: 0 1rem; /* Margen a los lados */
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto; /* Permite el desplazamiento vertical */
+      padding: 1rem;
+      max-width: 800px; /* Ancho máximo del área de mensajes */
+      margin: 0 auto; /* Centrar el área de mensajes */
+      width: 100%; /* Ocupar el ancho disponible */
+    }
+    .chat-input {
+      padding: 1rem;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+      position: sticky; /* Fija la barra en la parte inferior */
+      bottom: 0; /* La pega al fondo */
+      width: 100%; /* Ocupa todo el ancho */
+      max-width: 800px; /* Ancho máximo del input */
+      margin: 0 auto; /* Centrar el input */
+    }
+    .input-group {
+      width: 100%; /* Asegura que el input-group ocupe todo el ancho */
+    }
+  </style>
+
+  <div class="chat-container">
+    <!-- Área de mensajes (puedes agregar contenido aquí) -->
+    <div class="chat-messages rounded" id="chat-messages">
+      <!-- Aquí se mostrarían los mensajes del chat -->
+      
+    </div>
+
+    <!-- Barra de input para el chat -->
+    <div class="chat-input">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Escribe un mensaje..." aria-label="Mensaje" id="message-input">
+        <button class="btn btn-primary" type="button" id="message-button"><i class="bi bi-arrow-up"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <input type="hidden" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contextModal" id="modal-button">
+
+  <!-- Modal -->
+  <div class="modal fade" id="contextModal" tabindex="-1" aria-labelledby="contextModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="contextModalLabel">Configuración de la conversación</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal-button"></button>
+        </div>
+        <div class="modal-body py-4">
+          <label for="" class="form-label">Agregué un contexto en el que se desarrolla la conversación</label>
+          <input type="text" class="form-control" placeholder="Ordenando una hamburguesa en McDonald's" id="context-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerra</button>
+          <button type="button" class="btn btn-primary" id="add-context-button">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./../static/js/speaking.js"></script>
+{% endblock %}

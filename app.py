@@ -44,5 +44,24 @@ def generate_vocabulary():
   
   return feedback.json()
 
+
+@app.route('/speaking')
+def speaking():
+  return render_template('conversation.html')
+
+@app.route('/api/speaking', methods=['POST'])
+def respond_conversation():
+  """ 
+  do a petition to the API
+  """
+  data = request.json
+  conversation = data['conversation']
+  context = data['context']
+  
+  # do a petition to the API
+  next_message = requests.post(f'{API_URL}/speaking', json={'conversation': conversation, 'context': context})
+  
+  return next_message.json()
+
 if __name__ == '__main__':
   app.run(debug=True)

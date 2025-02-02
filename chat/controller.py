@@ -45,6 +45,23 @@ class ChatController:
     
     return self.send_message(messages).choices[0].message.content
   
+  def respond_conversation(self, conversation: str, context: str = "Eres un experto en el idioma inglés, y un buen profesor"):
+    """ 
+    Respond a conversation
+    
+    arguments:
+    conversation: str with the conversation (role, content)
+    
+    return: str next message
+    """
+    messages = [
+      {"role": "system", "content": "Responde con un mensaje que continue la conversación, se amable y ayúda a la otra persona a seguir aprendiendo dando recomendaciones y retroalimentación cuando sea necesario"},
+      {"role": "system", "content": f"Contexto en el que se da la conversación: {context}"},
+      {"role": "user", "content": "Responde solo con un mensaje en inglés, no agregues comentarios, por ejemplo: 'Hello, how are you?'"},
+      {"role": "user", "content": conversation}
+    ]
+
+    return self.send_message(messages).choices[0].message.content
 
 class WriteLetter(ChatController):
   """ 

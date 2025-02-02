@@ -37,3 +37,17 @@ def generate_vocabulary(topic: str = Body(..., embed=True), description: str = B
   write_letter = WriteLetter()
   vocabulary = write_letter.get_vocabulary(topic, description)
   return {"vocabulary": vocabulary}
+
+@app.post("/speaking")
+def respond_conversation(conversation: str = Body(..., embed=True), context: str = Body(..., embed=True)):
+  """ 
+  Respond a conversation
+  
+  arguments:
+  conversation: str content
+  
+  return: dict next_message: str
+  """
+  write_letter = WriteLetter()
+  next_message = write_letter.respond_conversation(conversation, context)
+  return {"next_message": next_message}

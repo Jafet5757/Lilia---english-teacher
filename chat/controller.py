@@ -55,9 +55,10 @@ class ChatController:
     return: str next message
     """
     messages = [
-      {"role": "system", "content": "Responde con un mensaje que continue la conversación, se amable y ayúda a la otra persona a seguir aprendiendo dando recomendaciones y retroalimentación cuando sea necesario"},
+      {"role": "system", "content": "Responde con un mensaje que continue la conversación, se amable y ayúda a la otra persona a seguir aprendiendo el idioma dando recomendaciones y retroalimentación cuando sea necesario"},
       {"role": "system", "content": f"Contexto en el que se da la conversación: {context}"},
-      {"role": "user", "content": "Responde solo con un mensaje en inglés, no agregues comentarios, por ejemplo: 'Hello, how are you?'"},
+      {"role": "system", "content": '''Responde con un mensaje en formato json, por ejemplo: {"message": "Hello, how are you?", "recommendation": "You can use the word 'good' to answer the question 'how are you?'"}'''},
+      {"role": "user", "content": "Ayúdame a tener una conversación en inglés como si fuera un nativo, estoy aprendiendo el idioma"},
       {"role": "user", "content": conversation}
     ]
 

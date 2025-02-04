@@ -3,6 +3,7 @@ const messageButton = document.getElementById('message-button');
 const chatMessagesContainer = document.getElementById('chat-messages');
 const modalButton = document.getElementById('modal-button');
 const addContextButton = document.getElementById('add-context-button');
+const MAX_LIMIT_OF_CHARACTERS = 2000;
 let context = '';
 
 // When the DOM is loaded
@@ -41,18 +42,29 @@ addContextButton.addEventListener('click', function () {
 /**
  * Show the message in the chat
  */
-function showMessage(msg = null, userType = 'user') {
+function showMessage(msg = null, userType = 'user', recommendation = null) {
   const message = msg == null ? messageInput.value : msg;
   const card = `
     <div class="alert alert-${userType == 'user' ? 'light' : 'primary'}" role="alert">
-      ${message}
+      <p class="mb-0">${message}</p>
+      ${recommendation != null ? `<hr><p class="mb-0">${recommendation}</p>` : ''}
     </div>
   `;
   chatMessagesContainer.innerHTML += card;
   // Clear the input
   messageInput.value = '';
+  // Scroll to the bottom
+  scrollToBottom();
 }
 
+function scrollToBottom() {
+  const chatMessages = document.getElementById("chat-messages");
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/**
+ * Get the next message from the server, sending the conversation and the context
+ */
 function getNextMessage() {
   let conversation = getConversation();
   
@@ -66,7 +78,10 @@ function getNextMessage() {
   })
     .then(response => response.json())
     .then(data => {
-      showMessage(data.next_message, 'bot');
+      let json = data.next_message;
+      // Transform the string to a JSON object
+      json = JSON.parse(json);
+      showMessage(json.message, 'bot', json.recommendation);
     });
 }
 
@@ -84,5 +99,5 @@ function getConversation() {
     const userType = message.classList.contains('alert-light') ? 'user' : 'bot';
     conversation += `(role: ${userType}, content: ${content}),`;
   }
-  return conversation;
+  return conversation.slice(MAX_LIMIT_OF_CHARACTERS*-1);
 }

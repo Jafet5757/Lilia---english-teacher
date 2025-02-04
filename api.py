@@ -49,5 +49,6 @@ def respond_conversation(conversation: str = Body(..., embed=True), context: str
   return: dict next_message: str
   """
   write_letter = WriteLetter()
+  context = context if context and context != '' else None
   next_message = write_letter.respond_conversation(conversation, context)
   return {"next_message": next_message}

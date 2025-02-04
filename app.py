@@ -4,6 +4,7 @@ import requests
 app = Flask(__name__)
 
 API_URL = 'http://127.0.0.1:8000'
+MAX_LIMIT_OF_CHARACTERS = 2000
 
 @app.route('/')
 def home():
@@ -55,7 +56,7 @@ def respond_conversation():
   do a petition to the API
   """
   data = request.json
-  conversation = data['conversation']
+  conversation = data['conversation'][-MAX_LIMIT_OF_CHARACTERS:]
   context = data['context']
   
   # do a petition to the API

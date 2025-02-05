@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Lilia - speaking{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col">
+      <label for="">Pregunta abierta</label>
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="" class="form-label">Pregunta opción multiple</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="" class="form-label">Pregunta de casillas</label>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label for="" class="form-check-label">
+          label
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./../static/js/questions.js"></script>
+
+{% endblock %}

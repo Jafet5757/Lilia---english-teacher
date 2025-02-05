@@ -37,7 +37,15 @@ addContextButton.addEventListener('click', function () {
   context = contextInput.value; // Set the context
   contextInput.value = ''; // Clear the input
   document.getElementById('close-modal-button').click(); // Close the modal
+  // focus the message input
+  messageInput.focus();
 });
+
+document.getElementById('context-input').addEventListener('keyup', function (event) {
+  if (event.key === 'Enter') {
+    addContextButton.click();
+  }
+})
 
 /**
  * Show the message in the chat

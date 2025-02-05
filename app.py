@@ -64,5 +64,22 @@ def respond_conversation():
   
   return next_message.json()
 
+@app.route('/questions')
+def questions():
+  return render_template('questions.html')
+
+@app.route('/api/questions', methods=['POST'])
+def answer_questions():
+  """ 
+  do a petition to the API
+  """
+  data = request.json
+  topic = data['topic']
+  
+  # do a petition to the API
+  answers = requests.post(f'{API_URL}/questions', json={'topic': topic})
+  
+  return answers.json()
+
 if __name__ == '__main__':
   app.run(debug=True)

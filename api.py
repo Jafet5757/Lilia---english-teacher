@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body
 from pydantic import BaseModel
-from chat.controller import WriteLetter
+from chat.controller import WriteLetter, Form
 
 app = FastAPI()
 
@@ -52,3 +52,17 @@ def respond_conversation(conversation: str = Body(..., embed=True), context: str
   context = context if context and context != '' else None
   next_message = write_letter.respond_conversation(conversation, context)
   return {"next_message": next_message}
+
+@app.post("/questions")
+def answer_questions(topic: str = Body(..., embed=True)):
+  """ 
+  Answer questions
+  
+  arguments:
+  questions: list of str
+  
+  return: dict answers: list
+  """
+  form = Form(topic)
+  form = form.get_questions()
+  return {"form": form}

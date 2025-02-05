@@ -82,7 +82,7 @@ class WriteLetter(ChatController):
     """
     messages = [
       {"role": "system", "content": "Eres un experto en el idioma inglés, y un buen profesor"},
-      {"role": "user", "content": "Dame una retroalimentación de mi carta, ayúdame con la gramatica y recomendaciones, señalame las areas en las que puedo mejorar y nuevo vocabulario en caso de ser necesario, también motivame a seguir aprendiendo recuerda que estoy aprendiendo el idioma"},
+      {"role": "user", "content": "Dame una retroalimentación de mi carta, ayúdame con la gramatica y recomendaciones, señalame las areas en las que puedo mejorar y nuevo vocabulario en caso de ser necesario"},
       {"role": "user", "content": letter}
     ]
     
@@ -106,6 +106,72 @@ class WriteLetter(ChatController):
     
     return self.send_message(messages).choices[0].message.content
   
+class Form(ChatController):
+  """ 
+  Create questions about a topic 
+  """
+  def __init__(self, topic:str, model:str = "gpt-4o-mini"):
+    self.topic = topic
+    super().__init__(model)
+    
+  def get_questions(self):
+    """ 
+    Get questions from the llm
+    
+    return: list of str
+    """
+    messages = [
+      {"role": "system", "content": "Eres un experto en el idioma inglés, y un buen profesor"},
+      {"role": "user", "content": '''Básado en un tema dame un listado de 10 preguntas en inglés para hacer un examen de conocimiento sobre el tema, responde con el siguiente formato json de ejemplo, no agregués más texto para poder parsearlo: 
+        {
+          "topic": "History of Art",
+          "questions": [
+            {
+              "id": "q1",
+              "type": "open",
+              "statement": "Explain the importance of the Renaissance in the evolution of European art.",
+              "options": null,
+              "correctAnswer": null,
+              "metadata": {
+                "suggestion": "Mention figures like Leonardo da Vinci and Michelangelo."
+              }
+            },
+            {
+              "id": "q2",
+              "type": "multiple_choice",
+              "statement": "Which of the following works is attributed to Leonardo da Vinci?",
+              "options": [
+                { "id": "a", "text": "Mona Lisa" },
+                { "id": "b", "text": "Guernica" },
+                { "id": "c", "text": "The Starry Night" }
+              ],
+              "correctAnswer": "a",
+              "metadata": null
+            },
+            {
+              "id": "q3",
+              "type": "checkboxes",
+              "statement": "Select the artistic movements that emerged in the 20th century:",
+              "options": [
+                { "id": "a", "text": "Cubism" },
+                { "id": "b", "text": "Impressionism" },
+                { "id": "c", "text": "Surrealism" },
+                { "id": "d", "text": "Baroque" }
+              ],
+              "correctAnswer": ["a", "c"],
+              "metadata": null
+            }
+          ],
+          "metadata": {
+            "totalQuestionsGenerated": 3,
+            "estimatedTime": "3 minutes"
+          }
+        }
+       '''},
+      {"role": "user", "content": f"Tema: {self.topic}"}
+    ]
+    
+    return self.send_message(messages).choices[0].message.content
 
 # Testing
 if __name__ == "__main__":
